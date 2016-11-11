@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>比较两个数组是否是相似数组</title>
+    
+</head>
+<body>
+        <!-- 编写arraysSimilar函数，实现判断传入的两个数组是否相似。具体需求：
+
+        1. 数组中的成员类型相同，顺序可以不同。例如[1, true] 与 [false, 2]是相似的。
+
+        2. 数组的长度一致。
+
+        3. 类型的判断范围，需要区分:String, Boolean, Number, undefined, null, 函数，日期, window.
+
+        当以上全部满足，则返回"判定结果:通过"，否则返回"判定结果:不通过"。 -->
+    <script type="text/javascript">   
+        /*
+         * param1 Array 
+         * param2 Array
+         * return true or false
+         */
+        function arraysSimilar(arr1, arr2){
+            console.log("---------------------------------比较两个参数是否是相似的数组--------------------------------------");
+            // 判断参数是否是数组
+            if (!(arr1 instanceof Array && arr2 instanceof Array)) {
+                console.log('----不是数组----');
+                return false;
+            }
+            // 判断长度
+            if(arr1.length !== arr2.length){
+                console.log("-----两个数组长度不同------");
+                return false;
+            }
+            // 判断是否有同样的类型。
+            var typeArr1 = arr1.map(typeOf);
+            var typeArr2 = arr2.map(typeOf);
+            function typeOf(elem) {
+                if (elem === null) {
+                    return "null";
+                }
+                else if (elem instanceof Array) {
+                    return "array";
+                }
+                else if (elem === window) {
+                    return "window";
+                }
+                else if (elem instanceof Date) {
+                    return "date";
+                }
+                else{
+                    var r = typeof elem;
+                    return r;
+                }
+            }
+            console.log('typeArr1:');
+            console.log(typeArr1);
+            console.log("typeArr2:");
+            console.log(typeArr2);
+            if (typeArr1.sort().toString()!== typeArr2.sort().toString()) {
+                console.log("-----两个数组的元素类型不同------");
+                return false;
+            }
+            console.log("-----两个数组的元素类型相同，这两个数组是类似的------");
+            return true;
+        }
+    </script>
+    <script src="testData.js"></script>
+</body>
+</html>
